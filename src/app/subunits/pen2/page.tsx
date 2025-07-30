@@ -244,5 +244,5 @@ export default function PEN2Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }

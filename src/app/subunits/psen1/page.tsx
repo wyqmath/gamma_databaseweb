@@ -214,5 +214,5 @@ export default function PSEN1Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }

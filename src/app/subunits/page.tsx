@@ -16,7 +16,7 @@ export default function SubunitsPage() {
         'Contains two critical catalytic aspartate residues (D257, D385)',
         'Undergoes endoproteolytic cleavage to generate active fragments',
         'Nine transmembrane domains forming the catalytic core',
-        'Most common target for familial Alzheimer\'s disease mutations'
+        'Most common target for familial Alzheimer disease mutations'
       ],
       stats: {
         species: 6,

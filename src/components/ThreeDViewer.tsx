@@ -138,7 +138,7 @@ export default function ThreeDViewer({
               <div className="text-slate-400 text-sm">
                 Interactive 3D structure viewer
                 <br />
-                <span className="text-xs">Click and drag to rotate â€¢ Scroll to zoom</span>
+                <span className="text-xs">Click and drag to rotate â€?Scroll to zoom</span>
               </div>
             </div>
           </div>

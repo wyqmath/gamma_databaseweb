@@ -256,5 +256,5 @@ export default function NCTPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -48,7 +48,6 @@ export default async function Home() {
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
         </div>
       </section>
-
       {/* Feature Cards */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
@@ -101,7 +100,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
       {/* News and Updates */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -136,7 +134,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
       {/* Quick Stats */}
       <section className="py-16 px-4 bg-slate-900/50">
         <div className="container mx-auto">

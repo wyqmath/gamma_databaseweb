@@ -53,7 +53,7 @@ export default function Header() {
                         <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-slate-800 to-slate-900 p-6 no-underline outline-none focus:shadow-md"
                           href="/subunits"
-                        >
+                         >
                           <div className="mb-2 mt-4 text-lg font-medium text-white">
                             γ-Secretase Subunits
                           </div>
@@ -65,7 +65,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/subunits/psen1" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/subunits/psen1"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">PSEN1</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Catalytic subunit containing active site
@@ -75,7 +78,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/subunits/nct" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/subunits/nct"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">NCT</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Substrate receptor subunit
@@ -85,7 +91,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/subunits/aph1" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/subunits/aph1"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">APH-1</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Stabilizing subunit
@@ -95,7 +104,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/subunits/pen2" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/subunits/pen2"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">PEN-2</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Assembly cofactor subunit
@@ -134,7 +146,7 @@ export default function Header() {
                         <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-slate-800 to-slate-900 p-6 no-underline outline-none focus:shadow-md"
                           href="/complex"
-                        >
+                         >
                           <div className="mb-2 mt-4 text-lg font-medium text-white">
                             γ-Secretase Complex
                           </div>
@@ -146,7 +158,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/interactions" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/interactions"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">Interactions</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Subunit-subunit interactions
@@ -156,7 +171,10 @@ export default function Header() {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link href="/complex" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400">
+                        <Link
+                          href="/complex"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
+                         >
                           <div className="text-sm font-medium leading-none text-white">Assembly</div>
                           <p className="line-clamp-2 text-sm leading-snug text-slate-400">
                             Complex assembly pathway
@@ -215,5 +233,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }

@@ -175,5 +175,5 @@ export default function APH1Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }

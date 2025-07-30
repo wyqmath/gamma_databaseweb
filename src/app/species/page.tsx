@@ -214,5 +214,5 @@ export default function SpeciesIndexPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
