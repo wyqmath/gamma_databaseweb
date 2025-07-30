@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Database Launch: γ-Secretase Comparative Analysis Platform",
+    "content": "We are excited to announce the launch of our comprehensive γ-secretase comparative database. This platform provides researchers with detailed sequence alignments, structural comparisons, and evolutionary analysis across multiple species.",
+    "date": "2024-01-15",
+    "type": "update"
+  },
+  {
+    "id": "2", 
+    "title": "New Structural Data: High-Resolution γ-Secretase Complex",
+    "content": "Added high-resolution structural models for all four γ-secretase subunits based on the latest cryo-EM structures. These models provide unprecedented detail into the catalytic mechanism and substrate binding sites.",
+    "date": "2024-01-10",
+    "type": "feature"
+  },
+  {
+    "id": "3",
+    "title": "Research Highlight: Evolutionary Conservation Analysis",
+    "content": "Our analysis reveals remarkable conservation of catalytic residues across species, while substrate-binding regions show species-specific adaptations. This data supports the dual role of γ-secretase in both essential development and pathological processes.",
+    "date": "2024-01-05",
+    "type": "research"
+  },
+  {
+    "id": "4",
+    "title": "Interactive Features: 3D Structure Viewer Enhanced",
+    "content": "The 3D structure viewer now supports real-time comparison of protein structures across species, with highlighting of conserved and variable regions. Users can now visualize evolutionary changes in three-dimensional context.",
+    "date": "2023-12-20",
+    "type": "feature"
+  },
+  {
+    "id": "5",
+    "title": "Data Update: Mouse Model Sequences Added",
+    "content": "Complete sequence data for mouse γ-secretase subunits has been added to the database, including detailed functional annotations and experimental validation data from knockout studies.",
+    "date": "2023-12-15",
+    "type": "update"
+  }
+]
