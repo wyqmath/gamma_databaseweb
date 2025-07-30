@@ -6,9 +6,9 @@ import { getComparisonData, getSpeciesById } from '@/lib/data'
 import { Info } from 'lucide-react'
 
 interface ComparisonPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default async function ComparisonPage({ params }: ComparisonPageProps) {

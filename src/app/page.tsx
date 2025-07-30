@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Database, Search, BarChart3, Microscope } from 'lucide-react'
+import { ArrowRight, Database, Search } from 'lucide-react'
 import { getNewsItems } from '@/lib/data'
 
 export default async function Home() {

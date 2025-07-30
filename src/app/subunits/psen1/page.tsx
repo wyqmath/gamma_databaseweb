@@ -27,7 +27,7 @@ export default function PSEN1Page() {
           <p className="text-slate-300 max-w-3xl mx-auto">
             The catalytic subunit of the γ-secretase complex, containing the active site aspartate 
             residues responsible for intramembrane proteolysis. PSEN1 is the most critical component 
-            and the primary target for Alzheimer's disease-related mutations.
+            and the primary target for Alzheimer&apos;s disease-related mutations.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export default function PSEN1Page() {
             <CardContent className="space-y-3">
               <div>
                 <span className="text-slate-400 text-sm">Disease Association:</span>
-                <p className="text-white">Familial Alzheimer's Disease</p>
+                <p className="text-white">Familial Alzheimer&apos;s Disease</p>
               </div>
               <div>
                 <span className="text-slate-400 text-sm">Known Mutations:</span>

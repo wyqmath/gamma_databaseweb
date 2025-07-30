@@ -15,12 +15,16 @@ import {
   Shield,
   LogOut,
   Plus,
-  Edit,
-  Trash2
+  Edit
 } from 'lucide-react'
 
+interface User {
+  username: string
+  role: string
+}
+
 export default function AdminPage() {
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 

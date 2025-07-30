@@ -206,19 +206,19 @@ export default function EvolutionPage() {
                   <span>Bootstrap support</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-cyan-400 mr-2">â—?/span>
+                  <span className="text-cyan-400 mr-2">&bull;</span>
                   <span>Mammals</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-green-400 mr-2">â—?/span>
+                  <span className="text-green-400 mr-2">&bull;</span>
                   <span>Fish</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-yellow-400 mr-2">â—?/span>
+                  <span className="text-yellow-400 mr-2">&bull;</span>
                   <span>Insects</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-purple-400 mr-2">â—?/span>
+                  <span className="text-purple-400 mr-2">&bull;</span>
                   <span>Nematodes</span>
                 </div>
               </div>
@@ -269,7 +269,7 @@ export default function EvolutionPage() {
               <ul className="space-y-3">
                 {treeData[selectedSubunit as keyof typeof treeData].keyFindings.map((finding, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-green-400 mr-2 mt-1">â€?/span>
+                    <span className="text-green-400 mr-2 mt-1">&check;</span>
                     <span className="text-slate-300 text-sm">{finding}</span>
                   </li>
                 ))}

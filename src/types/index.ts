@@ -17,6 +17,7 @@ export interface Protein {
   evolutionary_context?: string
   key_sites?: string[]
   experimental_data?: string
+  structure_file?: string
   created_at: string
 }
 

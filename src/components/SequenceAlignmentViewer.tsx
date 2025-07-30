@@ -34,7 +34,7 @@ export default function SequenceAlignmentViewer({
     }
   }
 
-  const { humanSequence, comparisonSequence, matchPattern } = parseAlignment(alignment.alignment_data)
+  const { humanSequence, comparisonSequence } = parseAlignment(alignment.alignment_data)
 
   const copyToClipboard = async (text: string) => {
     try {
