@@ -16,7 +16,7 @@ _audit_author.pdbx_ordinal
 "Google DeepMind" 1 
 "Isomorphic Labs" 2 
 #
-_audit_conform.dict_location https://raw.githubusercontent.com/ihmwg/ModelCIF/master/dist/mmcif_ma.dic
+_audit_conform.dict_location mmcif_ma.dic
 _audit_conform.dict_name     mmcif_ma.dic
 _audit_conform.dict_version  1.4.5
 #

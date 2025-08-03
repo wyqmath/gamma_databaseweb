@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Github, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -64,17 +64,7 @@ export default function Footer() {
                   About Project
                 </Link>
               </li>
-              <li>
-                <a 
-                  href="https://github.com/your-repo/gamma-secretase-db" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1"
-                >
-                  GitHub Repository
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </li>
+
               <li>
                 <Link href="/admin" className="text-slate-400 hover:text-cyan-400 transition-colors">
                   Admin Panel
@@ -105,15 +95,7 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <a 
-              href="https://github.com/your-repo/gamma-secretase-db" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-cyan-400 transition-colors"
-              aria-label="GitHub Repository"
-            >
-              <Github className="h-5 w-5" />
-            </a>
+
             <div className="text-xs text-slate-500">
               v1.0.0
             </div>

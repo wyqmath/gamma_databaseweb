@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Users, Target, Lightbulb, ExternalLink, Github } from 'lucide-react'
+import { ArrowLeft, Users, Target, Lightbulb, ExternalLink } from 'lucide-react'
 
 export default function AboutPage() {
   return (
@@ -250,13 +250,7 @@ export default function AboutPage() {
               Explore the Database
             </Link>
           </Button>
-          <Button asChild variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700">
-            <a href="https://github.com/your-repo/gamma-secretase-db" target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" />
-              View on GitHub
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
+
           <Button asChild variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700">
             <Link href="/admin">
               Admin Panel
