@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Users, Target, Lightbulb, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Users, Target, Lightbulb } from 'lucide-react'
 
 export default function AboutPage() {
   return (
@@ -214,7 +214,7 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-slate-300 text-lg">
-                We welcome contributions from the scientific community. Whether you're a researcher, 
+                We welcome contributions from the scientific community. Whether you&apos;re a researcher,
                 developer, or student, there are many ways to get involved with this project.
               </p>
               

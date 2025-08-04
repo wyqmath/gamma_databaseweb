@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Layers, Zap, Target, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Layers, Zap, Target } from 'lucide-react'
 
 export default function ComplexPage() {
   return (
@@ -71,7 +71,7 @@ export default function ComplexPage() {
                   <ul className="space-y-2 text-slate-300">
                     <li className="flex items-start">
                       <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      Alzheimer's disease pathogenesis
+                      Alzheimer&apos;s disease pathogenesis
                     </li>
                     <li className="flex items-start">
                       <span className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>

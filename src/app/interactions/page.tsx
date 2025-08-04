@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Network, Zap, Target, Layers, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Network, Zap, Target, Layers } from 'lucide-react'
 
 export default function InteractionsPage() {
   return (
@@ -40,7 +40,7 @@ export default function InteractionsPage() {
               <p className="text-slate-300 text-lg leading-relaxed">
                 The γ-secretase complex functions through a sophisticated network of protein-protein interactions 
                 that are essential for complex assembly, stability, and catalytic activity. Understanding these 
-                interactions is crucial for comprehending the complex's mechanism and developing therapeutic strategies.
+                interactions is crucial for comprehending the complex&apos;s mechanism and developing therapeutic strategies.
               </p>
             </CardContent>
           </Card>
