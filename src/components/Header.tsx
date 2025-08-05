@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Zap, Database, Search, TreePine } from 'lucide-react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +12,13 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -30,6 +37,51 @@ export default function Header() {
               <p className="text-xs text-slate-400">Comparative Analysis Platform</p>
             </div>
           </Link>
+
+          {/* Quick Access Menu */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-700">
+                  <Zap className="h-4 w-4 mr-2" />
+                  Quick Access
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700">
+                <DropdownMenuItem asChild>
+                  <Link href="/subunits" className="flex items-center">
+                    <Database className="h-4 w-4 mr-2" />
+                    Subunit Database
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/species" className="flex items-center">
+                    <Search className="h-4 w-4 mr-2" />
+                    Species Index
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/evolution" className="flex items-center">
+                    <TreePine className="h-4 w-4 mr-2" />
+                    Evolution Tree
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-slate-700" />
+                <DropdownMenuItem asChild>
+                  <Link href="/complex" className="flex items-center">
+                    <Database className="h-4 w-4 mr-2" />
+                    Complex Assembly
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/interactions" className="flex items-center">
+                    <Database className="h-4 w-4 mr-2" />
+                    Protein Interactions
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:flex">

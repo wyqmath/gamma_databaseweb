@@ -1,0 +1,50 @@
+[
+  {
+    "subunit1": "PSEN1",
+    "subunit2": "NCT",
+    "interaction_type": "Direct binding",
+    "binding_sites": ["N-terminal domain", "TMD1"],
+    "evolutionary_conservation": "Highly conserved",
+    "description": "PSEN1 interacts with NCT through its N-terminal domain, essential for complex assembly and stability."
+  },
+  {
+    "subunit1": "PSEN1",
+    "subunit2": "APH-1",
+    "interaction_type": "Transmembrane interaction",
+    "binding_sites": ["TMD2", "TMD3"],
+    "evolutionary_conservation": "Conserved",
+    "description": "APH-1 stabilizes PSEN1 through transmembrane domain interactions, facilitating proper folding."
+  },
+  {
+    "subunit1": "PSEN1",
+    "subunit2": "PEN-2",
+    "interaction_type": "Stabilizing interaction",
+    "binding_sites": ["TMD4", "Loop region"],
+    "evolutionary_conservation": "Highly conserved",
+    "description": "PEN-2 is essential for PSEN1 endoproteolysis and activation of the catalytic site."
+  },
+  {
+    "subunit1": "NCT",
+    "subunit2": "APH-1",
+    "interaction_type": "Structural support",
+    "binding_sites": ["Ectodomain", "TMD"],
+    "evolutionary_conservation": "Moderately conserved",
+    "description": "NCT and APH-1 provide structural framework for the complex assembly."
+  },
+  {
+    "subunit1": "NCT",
+    "subunit2": "PEN-2",
+    "interaction_type": "Indirect interaction",
+    "binding_sites": ["C-terminal region"],
+    "evolutionary_conservation": "Variable",
+    "description": "NCT and PEN-2 interact indirectly through PSEN1, contributing to complex stability."
+  },
+  {
+    "subunit1": "APH-1",
+    "subunit2": "PEN-2",
+    "interaction_type": "Assembly facilitation",
+    "binding_sites": ["TMD regions"],
+    "evolutionary_conservation": "Conserved",
+    "description": "APH-1 and PEN-2 work together to facilitate proper complex assembly and maturation."
+  }
+]

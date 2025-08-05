@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Zap, Shield, Wrench, Link as LinkIcon } from 'lucide-react'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function SubunitsPage() {
   const subunits = [
@@ -86,14 +87,34 @@ export default function SubunitsPage() {
   return (
     <div className="min-h-screen bg-slate-950 py-8">
       <div className="container mx-auto px-4">
+        {/* Breadcrumb */}
+        <div className="mb-6">
+          <Breadcrumb items={[{ label: 'Subunit Database', current: true }]} />
+        </div>
+
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">γ-Secretase Subunits</h1>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Explore the four essential subunits that form the γ-secretase complex. Each subunit plays 
-            a unique and critical role in the assembly, stability, and catalytic activity of this 
+            Explore the four essential subunits that form the γ-secretase complex. Each subunit plays
+            a unique and critical role in the assembly, stability, and catalytic activity of this
             important enzyme complex.
           </p>
+        </div>
+
+        {/* Overview */}
+        <div className="mb-12">
+          <Card className="bg-slate-800/30 border-slate-700">
+            <CardContent className="p-8">
+              <div className="text-center">
+                <p className="text-lg text-slate-300 max-w-4xl mx-auto leading-relaxed">
+                  The γ-secretase complex is a high molecular weight intramembrane protease composed of four
+                  essential subunits. Each subunit contributes unique structural and functional properties that are
+                  required for proper complex assembly and catalytic activity.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Subunits Grid */}
@@ -164,14 +185,71 @@ export default function SubunitsPage() {
             <CardTitle className="text-white text-center">The γ-Secretase Complex</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-center mb-6">
+            <div className="text-center mb-8">
               <p className="text-slate-300 max-w-3xl mx-auto">
-                The γ-secretase complex is a high molecular weight intramembrane protease composed of 
-                four essential subunits. Each subunit contributes unique structural and functional 
+                The γ-secretase complex is a high molecular weight intramembrane protease composed of
+                four essential subunits. Each subunit contributes unique structural and functional
                 properties that are required for proper complex assembly and catalytic activity.
               </p>
             </div>
-            
+
+            {/* Visual Complex Layout */}
+            <div className="relative bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8 mb-8">
+              <div className="flex items-center justify-between max-w-6xl mx-auto">
+                {/* Left side - γ-Secretase Subunits */}
+                <div className="flex-1 max-w-md">
+                  <div className="bg-gradient-to-br from-blue-600/20 to-blue-700/30 rounded-xl p-8 h-80 flex flex-col justify-center">
+                    <h3 className="text-3xl font-bold text-white mb-4">γ-Secretase Subunits</h3>
+                    <p className="text-slate-300 text-lg leading-relaxed">
+                      Explore the four essential subunits of the γ-secretase complex
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right side - Four subunits */}
+                <div className="flex-1 max-w-2xl ml-8">
+                  <div className="grid grid-cols-2 gap-6">
+                    {/* PSEN1 */}
+                    <div className="text-center">
+                      <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg mx-auto">
+                        <Zap className="h-10 w-10 text-white" />
+                      </div>
+                      <h4 className="text-white font-bold text-lg mb-1">PSEN1</h4>
+                      <p className="text-slate-300 text-sm">Catalytic subunit containing active site</p>
+                    </div>
+
+                    {/* NCT */}
+                    <div className="text-center">
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg mx-auto">
+                        <Shield className="h-10 w-10 text-white" />
+                      </div>
+                      <h4 className="text-white font-bold text-lg mb-1">NCT</h4>
+                      <p className="text-slate-300 text-sm">Substrate receptor subunit</p>
+                    </div>
+
+                    {/* APH-1 */}
+                    <div className="text-center">
+                      <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg mx-auto">
+                        <Wrench className="h-10 w-10 text-white" />
+                      </div>
+                      <h4 className="text-white font-bold text-lg mb-1">APH-1</h4>
+                      <p className="text-slate-300 text-sm">Stabilizing subunit</p>
+                    </div>
+
+                    {/* PEN-2 */}
+                    <div className="text-center">
+                      <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg mx-auto">
+                        <LinkIcon className="h-10 w-10 text-white" />
+                      </div>
+                      <h4 className="text-white font-bold text-lg mb-1">PEN-2</h4>
+                      <p className="text-slate-300 text-sm">Assembly cofactor subunit</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Grid layout for detailed info */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-3">

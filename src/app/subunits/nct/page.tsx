@@ -2,12 +2,21 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Shield, Database, ExternalLink } from 'lucide-react'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function NCTPage() {
   return (
     <div className="min-h-screen bg-slate-950 py-8">
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
+        <div className="mb-6">
+          <Breadcrumb items={[
+            { label: 'Subunit Database', href: '/subunits' },
+            { label: 'NCT', current: true }
+          ]} />
+        </div>
+
+        {/* Back Button */}
         <div className="mb-8">
           <Button asChild variant="ghost" className="text-slate-400 hover:text-white">
             <Link href="/subunits">

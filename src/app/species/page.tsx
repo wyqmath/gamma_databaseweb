@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Search, ArrowRight } from 'lucide-react'
 import { Species } from '@/types'
 import { getSpecies } from '@/lib/data'
+import Breadcrumb from '@/components/Breadcrumb'
+import { InlineQuickAccess } from '@/components/QuickAccessMenu'
 
 export default function SpeciesIndexPage() {
   const [species, setSpecies] = useState<Species[]>([])
@@ -73,6 +75,11 @@ export default function SpeciesIndexPage() {
   return (
     <div className="min-h-screen bg-slate-950 py-8">
       <div className="container mx-auto px-4">
+        {/* Breadcrumb */}
+        <div className="mb-6">
+          <Breadcrumb items={[{ label: 'Species Index', current: true }]} />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">Species Index</h1>
@@ -193,6 +200,12 @@ export default function SpeciesIndexPage() {
           </div>
         )}
 
+        {/* Quick Access */}
+        <div className="mt-12">
+          <h3 className="text-lg font-semibold text-white mb-4 text-center">Quick Access to Other Tools</h3>
+          <InlineQuickAccess className="max-w-4xl mx-auto" />
+        </div>
+
         {/* Call to Action */}
         <div className="mt-16 text-center">
           <Card className="bg-slate-800/30 border-slate-700 max-w-2xl mx-auto">
@@ -201,7 +214,7 @@ export default function SpeciesIndexPage() {
                 Interested in Adding Your Species?
               </h3>
               <p className="text-slate-300 mb-6">
-                We welcome contributions of new species data to expand our comparative database. 
+                We welcome contributions of new species data to expand our comparative database.
                 Contact us to learn about data submission guidelines.
               </p>
               <Button asChild variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700">

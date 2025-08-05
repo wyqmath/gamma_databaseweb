@@ -13,18 +13,45 @@ function getBaseUrl() {
     : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 }
 
+// Helper function to read JSON file safely
+async function readJsonFile<T>(filePath: string): Promise<T | null> {
+  try {
+    // Check if we're in a server environment and can read files directly
+    if (typeof window === 'undefined') {
+      try {
+        const fs = await import('fs')
+        const path = await import('path')
+        const fullPath = path.join(process.cwd(), 'public', filePath)
+        if (fs.existsSync(fullPath)) {
+          const fileContents = fs.readFileSync(fullPath, 'utf8')
+          return JSON.parse(fileContents)
+        }
+      } catch {
+        // If fs import fails, fall through to fetch
+        console.log('FS not available, using fetch')
+      }
+    }
+
+    // Fallback to fetch for client-side or when file doesn't exist
+    const baseUrl = getBaseUrl()
+    const response = await fetch(`${baseUrl}/${filePath}`)
+    if (!response.ok) throw new Error(`Failed to fetch ${filePath}`)
+    return await response.json()
+  } catch (error) {
+    console.error(`Error reading ${filePath}:`, error)
+    return null
+  }
+}
+
 // Data fetching functions - using real data from JSON files
 export async function getSpecies(): Promise<Species[]> {
   try {
-    const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/data/species.json`)
-    if (!response.ok) throw new Error('Failed to fetch species data')
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching species:', error)
+    const data = await readJsonFile<Species[]>('data/species.json')
+    if (data) return data
+
     // Fallback to Supabase if JSON fails and Supabase is available
     if (supabase) {
-      const { data, error: supabaseError } = await supabase
+      const { data: supabaseData, error: supabaseError } = await supabase
         .from('species')
         .select('*')
         .order('common_name')
@@ -34,9 +61,12 @@ export async function getSpecies(): Promise<Species[]> {
         return []
       }
 
-      return data || []
+      return supabaseData || []
     }
 
+    return []
+  } catch (error) {
+    console.error('Error fetching species:', error)
     return []
   }
 }
@@ -53,15 +83,12 @@ export async function getSpeciesById(id: string): Promise<Species | null> {
 
 export async function getProteins(): Promise<Protein[]> {
   try {
-    const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/data/proteins.json`)
-    if (!response.ok) throw new Error('Failed to fetch proteins data')
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching proteins:', error)
+    const data = await readJsonFile<Protein[]>('data/proteins.json')
+    if (data) return data
+
     // Fallback to Supabase if JSON fails and Supabase is available
     if (supabase) {
-      const { data, error: supabaseError } = await supabase
+      const { data: supabaseData, error: supabaseError } = await supabase
         .from('proteins')
         .select('*')
         .order('subunit')
@@ -71,9 +98,12 @@ export async function getProteins(): Promise<Protein[]> {
         return []
       }
 
-      return data || []
+      return supabaseData || []
     }
 
+    return []
+  } catch (error) {
+    console.error('Error fetching proteins:', error)
     return []
   }
 }
@@ -90,15 +120,12 @@ export async function getProteinsBySpecies(speciesId: string): Promise<Protein[]
 
 export async function getAlignments(): Promise<AlignmentData[]> {
   try {
-    const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/data/alignments.json`)
-    if (!response.ok) throw new Error('Failed to fetch alignments data')
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching alignments:', error)
+    const data = await readJsonFile<AlignmentData[]>('data/alignments.json')
+    if (data) return data
+
     // Fallback to Supabase if JSON fails and Supabase is available
     if (supabase) {
-      const { data, error: supabaseError } = await supabase
+      const { data: supabaseData, error: supabaseError } = await supabase
         .from('alignments')
         .select('*')
 
@@ -107,9 +134,12 @@ export async function getAlignments(): Promise<AlignmentData[]> {
         return []
       }
 
-      return data || []
+      return supabaseData || []
     }
 
+    return []
+  } catch (error) {
+    console.error('Error fetching alignments:', error)
     return []
   }
 }
@@ -156,17 +186,10 @@ export async function getComparisonData(humanSpeciesId: string, comparisonSpecie
 // Additional utility functions
 export async function getNewsItems(): Promise<NewsItem[]> {
   try {
-    // Use absolute URL for server-side rendering
-    const baseUrl = process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const data = await readJsonFile<NewsItem[]>('data/news.json')
+    if (data) return data
 
-    const response = await fetch(`${baseUrl}/data/news.json`)
-    if (!response.ok) throw new Error('Failed to fetch news data')
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching news:', error)
-    // Return fallback news data
+    // Return fallback news data if file reading fails
     return [
       {
         id: '1',
@@ -190,15 +213,25 @@ export async function getNewsItems(): Promise<NewsItem[]> {
         type: 'research'
       }
     ]
+  } catch (error) {
+    console.error('Error fetching news:', error)
+    // Return fallback news data
+    return [
+      {
+        id: '1',
+        title: 'Database Launch: γ-Secretase Comparative Analysis Platform',
+        content: 'We are excited to announce the launch of our comprehensive γ-secretase comparative database.',
+        date: '2024-01-15',
+        type: 'update'
+      }
+    ]
   }
 }
 
 export async function getInteractionData(): Promise<InteractionData[]> {
   try {
-    const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/data/interactions.json`)
-    if (!response.ok) throw new Error('Failed to fetch interaction data')
-    return await response.json()
+    const data = await readJsonFile<InteractionData[]>('data/interactions.json')
+    return data || []
   } catch (error) {
     console.error('Error fetching interactions:', error)
     return []
@@ -207,10 +240,8 @@ export async function getInteractionData(): Promise<InteractionData[]> {
 
 export async function getComplexAssemblySteps(): Promise<ComplexAssemblyStep[]> {
   try {
-    const baseUrl = getBaseUrl()
-    const response = await fetch(`${baseUrl}/data/complex_assembly.json`)
-    if (!response.ok) throw new Error('Failed to fetch complex assembly data')
-    return await response.json()
+    const data = await readJsonFile<ComplexAssemblyStep[]>('data/complex_assembly.json')
+    return data || []
   } catch (error) {
     console.error('Error fetching complex assembly:', error)
     return []

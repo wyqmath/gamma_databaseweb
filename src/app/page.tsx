@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Database, Search } from 'lucide-react'
+import { ArrowRight, Database, Search, TreePine, Layers } from 'lucide-react'
 import { getNewsItems } from '@/lib/data'
 
 export default async function Home() {
@@ -29,7 +29,7 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-              <Link href="/species">
+              <Link href="/explore">
                 Explore Species
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -48,6 +48,51 @@ export default async function Home() {
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
         </div>
       </section>
+
+      {/* Quick Navigation Section */}
+      <section className="py-12 px-4 bg-slate-900/30">
+        <div className="container mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">Quick Access</h2>
+            <p className="text-slate-400">Jump directly to key sections</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <Link href="/subunits" className="group">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/70 transition-colors">
+                <Database className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+                <h3 className="text-white font-medium text-sm">Subunit Database</h3>
+                <p className="text-slate-400 text-xs mt-1">PSEN1, NCT, APH-1, PEN-2</p>
+              </div>
+            </Link>
+
+            <Link href="/species" className="group">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/70 transition-colors">
+                <Search className="h-8 w-8 text-green-400 mx-auto mb-2" />
+                <h3 className="text-white font-medium text-sm">Species Index</h3>
+                <p className="text-slate-400 text-xs mt-1">Browse all organisms</p>
+              </div>
+            </Link>
+
+            <Link href="/evolution" className="group">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/70 transition-colors">
+                <TreePine className="h-8 w-8 text-purple-400 mx-auto mb-2" />
+                <h3 className="text-white font-medium text-sm">Evolution Tree</h3>
+                <p className="text-slate-400 text-xs mt-1">Phylogenetic analysis</p>
+              </div>
+            </Link>
+
+            <Link href="/complex" className="group">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800/70 transition-colors">
+                <Layers className="h-8 w-8 text-orange-400 mx-auto mb-2" />
+                <h3 className="text-white font-medium text-sm">Complex Assembly</h3>
+                <p className="text-slate-400 text-xs mt-1">3D structure view</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Feature Cards */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
