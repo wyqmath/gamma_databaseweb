@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Zap, Database, Search, TreePine } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,13 +12,6 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -38,50 +31,7 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Quick Access Menu */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="border-slate-600 text-slate-300 hover:bg-slate-700">
-                  <Zap className="h-4 w-4 mr-2" />
-                  Quick Access
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-slate-800 border-slate-700">
-                <DropdownMenuItem asChild>
-                  <Link href="/subunits" className="flex items-center">
-                    <Database className="h-4 w-4 mr-2" />
-                    Subunit Database
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/species" className="flex items-center">
-                    <Search className="h-4 w-4 mr-2" />
-                    Species Index
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/evolution" className="flex items-center">
-                    <TreePine className="h-4 w-4 mr-2" />
-                    Evolution Tree
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-slate-700" />
-                <DropdownMenuItem asChild>
-                  <Link href="/complex" className="flex items-center">
-                    <Database className="h-4 w-4 mr-2" />
-                    Complex Assembly
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/interactions" className="flex items-center">
-                    <Database className="h-4 w-4 mr-2" />
-                    Protein Interactions
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden md:flex">
@@ -99,8 +49,9 @@ export default function Header() {
                   Subunits
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    <li className="row-span-3">
+                  <div className="flex w-[480px] gap-4 p-4 max-w-[90vw]">
+                    {/* Left side - Main intro */}
+                    <div className="flex-1">
                       <NavigationMenuLink asChild>
                         <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-slate-800 to-slate-900 p-6 no-underline outline-none focus:shadow-md"
@@ -114,60 +65,59 @@ export default function Header() {
                           </p>
                         </Link>
                       </NavigationMenuLink>
-                    </li>
-                    <li>
+                    </div>
+
+                    {/* Right side - Subunit list */}
+                    <div className="flex-1 space-y-2">
                       <NavigationMenuLink asChild>
                         <Link
                           href="/subunits/psen1"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
                          >
                           <div className="text-sm font-medium leading-none text-white">PSEN1</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-slate-400">
+                          <p className="text-xs leading-snug text-slate-400">
                             Catalytic subunit containing active site
                           </p>
                         </Link>
                       </NavigationMenuLink>
-                    </li>
-                    <li>
+
                       <NavigationMenuLink asChild>
                         <Link
                           href="/subunits/nct"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
                          >
                           <div className="text-sm font-medium leading-none text-white">NCT</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-slate-400">
+                          <p className="text-xs leading-snug text-slate-400">
                             Substrate receptor subunit
                           </p>
                         </Link>
                       </NavigationMenuLink>
-                    </li>
-                    <li>
+
                       <NavigationMenuLink asChild>
                         <Link
                           href="/subunits/aph1"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
                          >
                           <div className="text-sm font-medium leading-none text-white">APH-1</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-slate-400">
+                          <p className="text-xs leading-snug text-slate-400">
                             Stabilizing subunit
                           </p>
                         </Link>
                       </NavigationMenuLink>
-                    </li>
-                    <li>
+
                       <NavigationMenuLink asChild>
                         <Link
                           href="/subunits/pen2"
                           className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400"
                          >
                           <div className="text-sm font-medium leading-none text-white">PEN-2</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-slate-400">
+                          <p className="text-xs leading-snug text-slate-400">
                             Assembly cofactor subunit
                           </p>
                         </Link>
                       </NavigationMenuLink>
-                    </li>
-                  </ul>
+                    </div>
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
@@ -192,7 +142,7 @@ export default function Header() {
                   Complex
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  <ul className="grid gap-3 p-6 w-[350px] md:w-[380px] lg:w-[420px] lg:grid-cols-[.75fr_1fr] max-w-[90vw]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
