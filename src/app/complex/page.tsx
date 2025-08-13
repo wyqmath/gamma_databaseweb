@@ -2,8 +2,12 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Layers, Zap, Target } from 'lucide-react'
+import { getAllComplexStructures, getInteractionData } from '@/lib/data'
+import ThreeDViewer from '@/components/ThreeDViewer'
 
-export default function ComplexPage() {
+export default async function ComplexPage() {
+  const complexStructures = await getAllComplexStructures()
+  const interactions = await getInteractionData()
   return (
     <div className="min-h-screen bg-slate-950 py-8">
       <div className="container mx-auto px-4">
@@ -232,6 +236,72 @@ export default function ComplexPage() {
         </section>
 
         {/* Action Buttons */}
+        {/* Complex Structures Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Complex Structures</h2>
+          <div className="grid gap-8">
+            {Object.entries(complexStructures).map(([proteinId, structures]) => (
+              <Card key={proteinId} className="bg-slate-800/50 border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-white">
+                    {proteinId} Complex Structures
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-6">
+                    {structures.map((structure, index) => (
+                      <div key={index} className="border border-slate-700 rounded-lg p-4">
+                        <h4 className="text-slate-300 font-medium mb-4">
+                          {structure.replace('.cif', '').replace(/_/g, ' + ')}
+                        </h4>
+                        <ThreeDViewer
+                          structureFile={`/structures/${structure}`}
+                          proteinName={structure.replace('.cif', '')}
+                          species="Complex"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Protein-Protein Interactions */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Subunit Interactions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {interactions.map((interaction, index) => (
+              <Card key={index} className="bg-slate-800/50 border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-white">
+                    {interaction.subunit1} ↔ {interaction.subunit2}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <span className="text-slate-400 text-sm">Interaction Type:</span>
+                    <p className="text-white">{interaction.interaction_type}</p>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Binding Sites:</span>
+                    <p className="text-slate-300">{interaction.binding_sites.join(', ')}</p>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Conservation:</span>
+                    <p className="text-slate-300">{interaction.evolutionary_conservation}</p>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Description:</span>
+                    <p className="text-slate-300">{interaction.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild className="bg-cyan-600 hover:bg-cyan-700 text-white">
             <Link href="/interactions">

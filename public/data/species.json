@@ -1,56 +1,42 @@
 [
   {
-    "id": "human",
-    "common_name": "Human",
-    "scientific_name": "Homo sapiens",
-    "category": "Mammals",
-    "image_url": "/images/species/human.jpg",
-    "description": "Reference species for γ-secretase complex comparison. The human γ-secretase complex is the most extensively studied and serves as the benchmark for understanding the structure and function of this critical enzyme complex involved in Alzheimer's disease pathogenesis.",
-    "created_at": "2024-01-01T00:00:00Z"
+    "id": "dictyostelium",
+    "common_name": "Slime Mold",
+    "scientific_name": "Dictyostelium discoideum",
+    "category": "Other",
+    "description": "γ-secretase complex data for Slime Mold",
+    "created_at": "2025-08-13T09:08:29.080Z"
   },
   {
-    "id": "mouse",
+    "id": "hibiscus",
+    "common_name": "Hibiscus",
+    "scientific_name": "Hibiscus syriacus",
+    "category": "Plants",
+    "description": "γ-secretase complex data for Hibiscus",
+    "created_at": "2025-08-13T09:08:29.081Z"
+  },
+  {
+    "id": "pocillopora",
+    "common_name": "Coral",
+    "scientific_name": "Pocillopora damicornis",
+    "category": "Other",
+    "description": "γ-secretase complex data for Coral",
+    "created_at": "2025-08-13T09:08:29.081Z"
+  },
+  {
+    "id": "mus",
     "common_name": "Mouse",
     "scientific_name": "Mus musculus",
     "category": "Mammals",
-    "image_url": "/images/species/mouse.jpg",
-    "description": "Primary laboratory model organism for γ-secretase research. Mouse models have been instrumental in understanding the role of γ-secretase in neurodegeneration and development, with high sequence conservation to human proteins.",
-    "created_at": "2024-01-01T00:00:00Z"
+    "description": "γ-secretase complex data for Mouse",
+    "created_at": "2025-08-13T09:08:29.081Z"
   },
   {
-    "id": "zebrafish",
+    "id": "danio",
     "common_name": "Zebrafish",
     "scientific_name": "Danio rerio",
     "category": "Fish",
-    "image_url": "/images/species/zebrafish.jpg",
-    "description": "Important vertebrate model for developmental studies of γ-secretase function. Zebrafish possess functional γ-secretase complexes that play crucial roles in Notch signaling during embryonic development.",
-    "created_at": "2024-01-01T00:00:00Z"
-  },
-  {
-    "id": "drosophila",
-    "common_name": "Fruit Fly",
-    "scientific_name": "Drosophila melanogaster",
-    "category": "Insects",
-    "image_url": "/images/species/drosophila.jpg",
-    "description": "Classic genetic model organism where γ-secretase function was first characterized. Drosophila studies revealed the essential role of presenilin in Notch signaling and provided insights into the evolutionary conservation of the complex.",
-    "created_at": "2024-01-01T00:00:00Z"
-  },
-  {
-    "id": "celegans",
-    "common_name": "C. elegans",
-    "scientific_name": "Caenorhabditis elegans",
-    "category": "Nematodes",
-    "image_url": "/images/species/celegans.jpg",
-    "description": "Simple model organism with a well-characterized γ-secretase complex. C. elegans studies have provided insights into the basic mechanisms of presenilin function and its role in development.",
-    "created_at": "2024-01-01T00:00:00Z"
-  },
-  {
-    "id": "arabidopsis",
-    "common_name": "Thale Cress",
-    "scientific_name": "Arabidopsis thaliana",
-    "category": "Plants",
-    "image_url": "/images/species/arabidopsis.jpg",
-    "description": "Model plant organism that lacks a traditional γ-secretase complex but contains presenilin-like proteins involved in different cellular processes, providing insights into the evolutionary origins of the complex.",
-    "created_at": "2024-01-01T00:00:00Z"
+    "description": "γ-secretase complex data for Zebrafish",
+    "created_at": "2025-08-13T09:08:29.081Z"
   }
 ]

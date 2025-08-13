@@ -2,8 +2,12 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Zap, AlertTriangle, Database, ExternalLink } from 'lucide-react'
+import { getProteins } from '@/lib/data'
+import ThreeDViewer from '@/components/ThreeDViewer'
 
-export default function PSEN1Page() {
+export default async function PSEN1Page() {
+  const proteins = await getProteins()
+  const psen1Proteins = proteins.filter(p => p.subunit === 'PSEN1')
   return (
     <div className="min-h-screen bg-slate-950 py-8">
       <div className="container mx-auto px-4">
@@ -192,6 +196,54 @@ export default function PSEN1Page() {
             </div>
           </CardContent>
         </Card>
+
+        {/* PSEN1 Proteins Across Species */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">PSEN1 Across Species</h2>
+          <div className="grid gap-6">
+            {psen1Proteins.map((protein) => (
+              <Card key={protein.id} className="bg-slate-800/50 border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-white">
+                    {protein.id} - {protein.species_id.charAt(0).toUpperCase() + protein.species_id.slice(1)}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid lg:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-slate-300 font-medium mb-2">Sequence Information</h4>
+                      <div className="space-y-2 text-sm">
+                        <div>
+                          <span className="text-slate-400">Length:</span>
+                          <span className="text-white ml-2">{protein.sequence.length} amino acids</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Description:</span>
+                          <p className="text-slate-300 mt-1">{protein.description}</p>
+                        </div>
+                        <div className="mt-4">
+                          <span className="text-slate-400">Sequence (first 100 residues):</span>
+                          <div className="bg-slate-900 p-3 rounded mt-2 font-mono text-xs text-green-400 break-all">
+                            {protein.sequence.substring(0, 100)}...
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {protein.structure_file && (
+                        <ThreeDViewer
+                          structureFile={protein.structure_file}
+                          proteinName={protein.subunit}
+                          species={protein.species_id}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

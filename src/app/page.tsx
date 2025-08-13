@@ -2,10 +2,16 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Database, Search, TreePine, Layers } from 'lucide-react'
-import { getNewsItems } from '@/lib/data'
+import { getNewsItems, getSpecies, getProteins, getAllComplexStructures } from '@/lib/data'
 
 export default async function Home() {
   const newsItems = await getNewsItems()
+  const species = await getSpecies()
+  const proteins = await getProteins()
+  const complexStructures = await getAllComplexStructures()
+
+  // Calculate stats
+  const totalComplexes = Object.values(complexStructures).reduce((sum, structures) => sum + structures.length, 0)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
@@ -184,7 +190,7 @@ export default async function Home() {
         <div className="container mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400 mb-2">6</div>
+              <div className="text-3xl font-bold text-cyan-400 mb-2">{species.length}</div>
               <div className="text-slate-400 text-sm">Species</div>
             </div>
             <div className="text-center">
@@ -192,12 +198,12 @@ export default async function Home() {
               <div className="text-slate-400 text-sm">Subunits</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400 mb-2">24</div>
+              <div className="text-3xl font-bold text-green-400 mb-2">{proteins.length}</div>
               <div className="text-slate-400 text-sm">Proteins</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400 mb-2">12</div>
-              <div className="text-slate-400 text-sm">Comparisons</div>
+              <div className="text-3xl font-bold text-purple-400 mb-2">{totalComplexes}</div>
+              <div className="text-slate-400 text-sm">Complex Structures</div>
             </div>
           </div>
         </div>

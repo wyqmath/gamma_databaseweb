@@ -21,6 +21,16 @@ export interface Protein {
   created_at: string
 }
 
+// Interface for the raw gamma_secretase.json data
+export interface GammaSecreteaseData {
+  species_name: string
+  id: string
+  subunits: string
+  sequence: string
+  structure_files: string
+  complex_structures: string[]
+}
+
 export interface AlignmentData {
   id: string
   human_protein_id: string

@@ -1,5 +1,4 @@
-import { supabase } from './supabase'
-import { Species, Protein, AlignmentData, ComparisonData, NewsItem, InteractionData, ComplexAssemblyStep } from '@/types'
+import { Species, Protein, AlignmentData, ComparisonData, NewsItem, InteractionData, ComplexAssemblyStep, GammaSecreteaseData } from '@/types'
 
 // Helper function to get base URL
 function getBaseUrl() {
@@ -49,25 +48,83 @@ export async function getSpecies(): Promise<Species[]> {
     const data = await readJsonFile<Species[]>('data/species.json')
     if (data) return data
 
-    // Fallback to Supabase if JSON fails and Supabase is available
-    if (supabase) {
-      const { data: supabaseData, error: supabaseError } = await supabase
-        .from('species')
-        .select('*')
-        .order('common_name')
+    // Generate species data from gamma_secretase.json if species.json doesn't exist
+    const gammaData = await readJsonFile<GammaSecreteaseData[]>('data/gamma_secretase.json')
+    if (gammaData) {
+      const speciesMap = new Map<string, Species>()
 
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError)
-        return []
-      }
+      gammaData.forEach((entry) => {
+        const speciesName = entry.species_name
+        if (!speciesMap.has(speciesName)) {
+          speciesMap.set(speciesName, {
+            id: speciesName.toLowerCase(),
+            common_name: getCommonName(speciesName),
+            scientific_name: getScientificName(speciesName),
+            category: getSpeciesCategory(speciesName),
+            description: `γ-secretase complex data for ${getCommonName(speciesName)}`,
+            created_at: new Date().toISOString()
+          })
+        }
+      })
 
-      return supabaseData || []
+      return Array.from(speciesMap.values())
     }
 
     return []
   } catch (error) {
     console.error('Error fetching species:', error)
     return []
+  }
+}
+
+// Helper functions for species data
+function getCommonName(speciesName: string): string {
+  const nameMap: Record<string, string> = {
+    'Dictyostelium': 'Slime Mold',
+    'Hibiscus': 'Hibiscus',
+    'Pocillopora': 'Coral',
+    'Mus': 'Mouse',
+    'Danio': 'Zebrafish',
+    'Branchiostoma': 'Amphioxus'
+  }
+  return nameMap[speciesName] || speciesName
+}
+
+function getScientificName(speciesName: string): string {
+  const nameMap: Record<string, string> = {
+    'Dictyostelium': 'Dictyostelium discoideum',
+    'Hibiscus': 'Hibiscus syriacus',
+    'Pocillopora': 'Pocillopora damicornis',
+    'Mus': 'Mus musculus',
+    'Danio': 'Danio rerio',
+    'Branchiostoma': 'Branchiostoma floridae'
+  }
+  return nameMap[speciesName] || speciesName
+}
+
+function getSpeciesCategory(speciesName: string): string {
+  const categoryMap: Record<string, string> = {
+    'Dictyostelium': 'Other',
+    'Hibiscus': 'Plants',
+    'Pocillopora': 'Other',
+    'Mus': 'Mammals',
+    'Danio': 'Fish',
+    'Branchiostoma': 'Other'
+  }
+  return categoryMap[speciesName] || 'Other'
+}
+
+function normalizeSubunitName(subunit: string): 'PSEN1' | 'PEN-2' | 'APH-1' | 'NCT' {
+  switch (subunit) {
+    case 'PEN2':
+      return 'PEN-2'
+    case 'APH1':
+      return 'APH-1'
+    case 'PSEN1':
+    case 'NCT':
+      return subunit as 'PSEN1' | 'NCT'
+    default:
+      throw new Error(`Unknown subunit: ${subunit}`)
   }
 }
 
@@ -86,19 +143,18 @@ export async function getProteins(): Promise<Protein[]> {
     const data = await readJsonFile<Protein[]>('data/proteins.json')
     if (data) return data
 
-    // Fallback to Supabase if JSON fails and Supabase is available
-    if (supabase) {
-      const { data: supabaseData, error: supabaseError } = await supabase
-        .from('proteins')
-        .select('*')
-        .order('subunit')
-
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError)
-        return []
-      }
-
-      return supabaseData || []
+    // Generate proteins data from gamma_secretase.json if proteins.json doesn't exist
+    const gammaData = await readJsonFile<GammaSecreteaseData[]>('data/gamma_secretase.json')
+    if (gammaData) {
+      return gammaData.map((entry) => ({
+        id: entry.id,
+        species_id: entry.species_name.toLowerCase(),
+        subunit: normalizeSubunitName(entry.subunits),
+        sequence: entry.sequence,
+        description: `${entry.subunits} subunit from ${getCommonName(entry.species_name)}`,
+        structure_file: entry.structure_files,
+        created_at: new Date().toISOString()
+      }))
     }
 
     return []
@@ -121,23 +177,7 @@ export async function getProteinsBySpecies(speciesId: string): Promise<Protein[]
 export async function getAlignments(): Promise<AlignmentData[]> {
   try {
     const data = await readJsonFile<AlignmentData[]>('data/alignments.json')
-    if (data) return data
-
-    // Fallback to Supabase if JSON fails and Supabase is available
-    if (supabase) {
-      const { data: supabaseData, error: supabaseError } = await supabase
-        .from('alignments')
-        .select('*')
-
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError)
-        return []
-      }
-
-      return supabaseData || []
-    }
-
-    return []
+    return data || []
   } catch (error) {
     console.error('Error fetching alignments:', error)
     return []
@@ -245,5 +285,76 @@ export async function getComplexAssemblySteps(): Promise<ComplexAssemblyStep[]> 
   } catch (error) {
     console.error('Error fetching complex assembly:', error)
     return []
+  }
+}
+
+// Get complex structures for a specific protein
+export async function getComplexStructures(proteinId: string): Promise<string[]> {
+  try {
+    const gammaData = await readJsonFile<GammaSecreteaseData[]>('data/gamma_secretase.json')
+    if (gammaData) {
+      const protein = gammaData.find(entry => entry.id === proteinId)
+      return protein?.complex_structures || []
+    }
+    return []
+  } catch (error) {
+    console.error('Error fetching complex structures:', error)
+    return []
+  }
+}
+
+// Get all available complex structures
+export async function getAllComplexStructures(): Promise<{[key: string]: string[]}> {
+  try {
+    const gammaData = await readJsonFile<GammaSecreteaseData[]>('data/gamma_secretase.json')
+    if (gammaData) {
+      const complexMap: {[key: string]: string[]} = {}
+      gammaData.forEach(entry => {
+        if (entry.complex_structures && entry.complex_structures.length > 0) {
+          complexMap[entry.id] = entry.complex_structures
+        }
+      })
+      return complexMap
+    }
+    return {}
+  } catch (error) {
+    console.error('Error fetching all complex structures:', error)
+    return {}
+  }
+}
+
+// Get subunit statistics
+export async function getSubunitStats(): Promise<{[key: string]: {species: number, proteins: number}}> {
+  try {
+    const proteins = await getProteins()
+    const stats: {[key: string]: {species: number, proteins: number}} = {}
+
+    // Initialize stats for all subunits
+    const subunits = ['PSEN1', 'NCT', 'APH-1', 'PEN-2']
+    subunits.forEach(subunit => {
+      stats[subunit] = { species: 0, proteins: 0 }
+    })
+
+    // Count proteins and species for each subunit
+    proteins.forEach(protein => {
+      if (stats[protein.subunit]) {
+        stats[protein.subunit].proteins++
+      }
+    })
+
+    // Count unique species for each subunit
+    subunits.forEach(subunit => {
+      const speciesSet = new Set(
+        proteins
+          .filter(p => p.subunit === subunit)
+          .map(p => p.species_id)
+      )
+      stats[subunit].species = speciesSet.size
+    })
+
+    return stats
+  } catch (error) {
+    console.error('Error calculating subunit stats:', error)
+    return {}
   }
 }

@@ -193,12 +193,12 @@ export default function AboutPage() {
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-4">Backend & Data</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4">Data & Storage</h3>
                   <ul className="space-y-2 text-slate-300">
-                    <li>• Supabase (PostgreSQL) database</li>
-                    <li>• Real-time data synchronization</li>
-                    <li>• RESTful API endpoints</li>
-                    <li>• File storage for documents</li>
+                    <li>• JSON-based data storage</li>
+                    <li>• Structured protein sequence data</li>
+                    <li>• Local file system for documents</li>
+                    <li>• Optimized data fetching</li>
                   </ul>
                 </div>
               </div>

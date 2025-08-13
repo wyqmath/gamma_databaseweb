@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Zap, Shield, Wrench, Link as LinkIcon } from 'lucide-react'
 import Breadcrumb from '@/components/Breadcrumb'
+import { getSubunitStats } from '@/lib/data'
 
-export default function SubunitsPage() {
+export default async function SubunitsPage() {
+  const subunitStats = await getSubunitStats()
   const subunits = [
     {
       id: 'psen1',
@@ -20,8 +22,8 @@ export default function SubunitsPage() {
         'Most common target for familial Alzheimer disease mutations'
       ],
       stats: {
-        species: 6,
-        mutations: '300+',
+        species: subunitStats['PSEN1']?.species || 0,
+        proteins: subunitStats['PSEN1']?.proteins || 0,
         conservation: '96.7%'
       }
     },
@@ -39,8 +41,8 @@ export default function SubunitsPage() {
         'Essential for substrate selectivity and binding'
       ],
       stats: {
-        species: 6,
-        mutations: '50+',
+        species: subunitStats['NCT']?.species || 0,
+        proteins: subunitStats['NCT']?.proteins || 0,
         conservation: '91.8%'
       }
     },
@@ -58,8 +60,8 @@ export default function SubunitsPage() {
         'Contains conserved histidine residues'
       ],
       stats: {
-        species: 6,
-        mutations: '20+',
+        species: subunitStats['APH-1']?.species || 0,
+        proteins: subunitStats['APH-1']?.proteins || 0,
         conservation: '94.2%'
       }
     },
@@ -77,8 +79,8 @@ export default function SubunitsPage() {
         'Facilitates presenilin endoproteolysis'
       ],
       stats: {
-        species: 6,
-        mutations: '10+',
+        species: subunitStats['PEN-2']?.species || 0,
+        proteins: subunitStats['PEN-2']?.proteins || 0,
         conservation: '98.0%'
       }
     }
@@ -157,8 +159,8 @@ export default function SubunitsPage() {
                       <div className="text-xs text-slate-500">Species</div>
                     </div>
                     <div className="text-center p-3 bg-slate-900/50 rounded-lg">
-                      <div className="text-lg font-bold text-yellow-400">{subunit.stats.mutations}</div>
-                      <div className="text-xs text-slate-500">Mutations</div>
+                      <div className="text-lg font-bold text-yellow-400">{subunit.stats.proteins}</div>
+                      <div className="text-xs text-slate-500">Proteins</div>
                     </div>
                     <div className="text-center p-3 bg-slate-900/50 rounded-lg">
                       <div className="text-lg font-bold text-green-400">{subunit.stats.conservation}</div>

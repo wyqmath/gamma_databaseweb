@@ -185,8 +185,8 @@ export default function SpeciesIndexPage() {
                             {speciesItem.category}
                           </span>
                           <Button asChild size="sm" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                            <Link href={`/comparison/human-vs-${speciesItem.id}`}>
-                              Compare
+                            <Link href={`/explore?species=${speciesItem.id}`}>
+                              Explore
                               <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>
                           </Button>

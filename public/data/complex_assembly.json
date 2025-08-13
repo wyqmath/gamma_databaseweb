@@ -1,38 +1,32 @@
 [
   {
     "step": 1,
-    "description": "Initial PSEN1 synthesis and membrane insertion",
-    "subunits_involved": ["PSEN1"],
-    "intermediate_complex": "PSEN1 monomer"
+    "description": "PSEN1 and APH-1 form initial complex",
+    "subunits_involved": [
+      "PSEN1",
+      "APH-1"
+    ],
+    "intermediate_complex": "PSEN1-APH1"
   },
   {
     "step": 2,
-    "description": "NCT association with PSEN1 N-terminal domain",
-    "subunits_involved": ["PSEN1", "NCT"],
-    "intermediate_complex": "PSEN1-NCT binary complex"
+    "description": "NCT associates with PSEN1-APH1 complex",
+    "subunits_involved": [
+      "PSEN1",
+      "APH-1",
+      "NCT"
+    ],
+    "intermediate_complex": "PSEN1-APH1-NCT"
   },
   {
     "step": 3,
-    "description": "APH-1 recruitment and transmembrane stabilization",
-    "subunits_involved": ["PSEN1", "NCT", "APH-1"],
-    "intermediate_complex": "PSEN1-NCT-APH1 ternary complex"
-  },
-  {
-    "step": 4,
-    "description": "PEN-2 incorporation and complex maturation",
-    "subunits_involved": ["PSEN1", "NCT", "APH-1", "PEN-2"],
-    "intermediate_complex": "Immature γ-secretase complex"
-  },
-  {
-    "step": 5,
-    "description": "PSEN1 endoproteolytic cleavage and activation",
-    "subunits_involved": ["PSEN1", "NCT", "APH-1", "PEN-2"],
-    "intermediate_complex": "Mature γ-secretase complex"
-  },
-  {
-    "step": 6,
-    "description": "Final complex stabilization and trafficking",
-    "subunits_involved": ["PSEN1", "NCT", "APH-1", "PEN-2"],
-    "intermediate_complex": "Active γ-secretase complex"
+    "description": "PEN-2 joins to form mature γ-secretase complex",
+    "subunits_involved": [
+      "PSEN1",
+      "APH-1",
+      "NCT",
+      "PEN-2"
+    ],
+    "intermediate_complex": "γ-secretase complex"
   }
 ]
