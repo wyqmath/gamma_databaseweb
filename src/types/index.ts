@@ -43,6 +43,31 @@ export interface AlignmentData {
   created_at: string
 }
 
+export interface MultipleSequenceAlignment {
+  sequences: Array<{
+    id: string
+    name: string
+    sequence: string
+    species?: string
+    subunit?: string
+  }>
+  alignedSequences: string[]
+  alignmentScore?: number
+  method?: 'auto' | 'complete' | 'diag'
+  type?: 'auto' | 'amino' | 'nucleic'
+  gapChar?: string
+}
+
+export interface MSAOptions {
+  gapopen?: number
+  gapextend?: number
+  matrix?: number[][]
+  method?: 'auto' | 'complete' | 'diag'
+  type?: 'auto' | 'amino' | 'nucleic'
+  gapchar?: string
+  debug?: boolean
+}
+
 export interface ComparisonData {
   human_protein: Protein
   comparison_protein: Protein

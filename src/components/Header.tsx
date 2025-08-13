@@ -138,6 +138,14 @@ export default function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/msa" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-cyan-400 focus:bg-slate-800 focus:text-cyan-400 focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                    Multiple Sequence Alignment
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-slate-300 hover:text-cyan-400">
                   Complex
                 </NavigationMenuTrigger>
@@ -213,6 +221,9 @@ export default function Header() {
               </Link>
               <Link href="/evolution" className="px-4 py-2 text-slate-300 hover:text-cyan-400 hover:bg-slate-800 rounded-md">
                 Evolution
+              </Link>
+              <Link href="/msa" className="px-4 py-2 text-slate-300 hover:text-cyan-400 hover:bg-slate-800 rounded-md">
+                Multiple Sequence Alignment
               </Link>
               <div className="px-4 py-2">
                 <div className="text-sm font-medium text-slate-400 mb-2">Subunits</div>
