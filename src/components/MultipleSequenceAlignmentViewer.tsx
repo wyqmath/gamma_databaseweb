@@ -1,29 +1,41 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { MultipleSequenceAlignment, MSAOptions } from '@/types'
-import { 
-  Play, 
-  Download, 
-  Copy, 
-  Settings, 
-  Eye, 
-  EyeOff, 
-  Plus, 
+import {
+  Play,
+  Download,
+  Copy,
+  Settings,
+  Eye,
+  EyeOff,
+  Plus,
   Trash2,
   AlertCircle,
   Loader2
 } from 'lucide-react'
 
 // Dynamically import biomsa
-let biomsa: any = null
+// Define a minimal type for the biomsa module
+type BiomsaLike = { align: (seqs: string[], options: MSAOptions) => Promise<string[]> }
+// Type guard to check biomsa-like modules
+const isBiomsaLike = (m: unknown): m is BiomsaLike => {
+  return typeof (m as { align?: unknown }).align === 'function'
+}
+
+let biomsa: BiomsaLike | null = null
 if (typeof window !== 'undefined') {
   import('biomsa').then((module) => {
-    biomsa = module.default || module
+    const maybeDefault: unknown = (module as { default?: unknown }).default ?? module
+    if (isBiomsaLike(maybeDefault)) {
+      biomsa = maybeDefault
+    } else {
+      console.error('Loaded biomsa module does not expose an align function as expected')
+    }
   })
 }
 
@@ -51,7 +63,7 @@ export default function MultipleSequenceAlignmentViewer({
   const [showSettings, setShowSettings] = useState(false)
   const [highlightDifferences, setHighlightDifferences] = useState(true)
   const [showFullAlignment, setShowFullAlignment] = useState(false)
-  
+
   // MSA options
   const [msaOptions, setMsaOptions] = useState<MSAOptions>({
     method: 'auto',
@@ -117,9 +129,9 @@ export default function MultipleSequenceAlignmentViewer({
 
     try {
       const sequenceStrings = sequences.map(seq => seq.sequence)
-      
+
       const result = await biomsa.align(sequenceStrings, msaOptions)
-      
+
       const alignmentResult: MultipleSequenceAlignment = {
         sequences: sequences,
         alignedSequences: result,
@@ -141,7 +153,7 @@ export default function MultipleSequenceAlignmentViewer({
   const copyAlignment = async () => {
     if (!alignment) return
 
-    const content = alignment.sequences.map((seq, index) => 
+    const content = alignment.sequences.map((seq, index) =>
       `>${seq.name}${seq.species ? ` (${seq.species})` : ''}${seq.subunit ? ` [${seq.subunit}]` : ''}\n${alignment.alignedSequences[index]}`
     ).join('\n\n')
 
@@ -156,7 +168,7 @@ export default function MultipleSequenceAlignmentViewer({
   const downloadAlignment = () => {
     if (!alignment) return
 
-    const content = alignment.sequences.map((seq, index) => 
+    const content = alignment.sequences.map((seq, index) =>
       `>${seq.name}${seq.species ? ` (${seq.species})` : ''}${seq.subunit ? ` [${seq.subunit}]` : ''}\n${alignment.alignedSequences[index]}`
     ).join('\n\n')
 
@@ -176,13 +188,13 @@ export default function MultipleSequenceAlignmentViewer({
     if (!alignment) return null
 
     const end = Math.min(start + length, alignment.alignedSequences[0]?.length || 0)
-    
+
     return (
       <div key={start} className="mb-6 font-mono text-sm">
         {alignment.sequences.map((seq, seqIndex) => {
           const alignedSeq = alignment.alignedSequences[seqIndex]
           const block = alignedSeq.substring(start, end)
-          
+
           return (
             <div key={seqIndex} className="flex items-center mb-1">
               <div className="w-32 text-slate-400 text-xs truncate mr-4">
@@ -197,14 +209,14 @@ export default function MultipleSequenceAlignmentViewer({
                   const isGap = char === (alignment.gapChar || '-')
 
                   // Check if different from other sequences
-                  const isDifferent = highlightDifferences && 
-                    alignment.alignedSequences.some((otherSeq, otherIndex) => 
-                      otherIndex !== seqIndex && 
+                  const isDifferent = highlightDifferences &&
+                    alignment.alignedSequences.some((otherSeq, otherIndex) =>
+                      otherIndex !== seqIndex &&
                       otherSeq[globalPos] !== char &&
                       otherSeq[globalPos] !== (alignment.gapChar || '-') &&
                       char !== (alignment.gapChar || '-')
                     )
-                  
+
                   return (
                     <span
                       key={charIndex}
@@ -225,7 +237,7 @@ export default function MultipleSequenceAlignmentViewer({
             </div>
           )
         })}
-        
+
         {/* Consensus indicator */}
         <div className="flex items-center mt-1">
           <div className="w-32 mr-4"></div>
@@ -235,10 +247,10 @@ export default function MultipleSequenceAlignmentViewer({
               const pos = start + i
               const chars = alignment.alignedSequences.map(seq => seq[pos])
               const uniqueChars = new Set(chars.filter(c => c !== (alignment.gapChar || '-')))
-              
+
               return (
                 <span key={i}>
-                  {uniqueChars.size === 1 && chars.some(c => c !== (alignment.gapChar || '-')) ? '*' : 
+                  {uniqueChars.size === 1 && chars.some(c => c !== (alignment.gapChar || '-')) ? '*' :
                    uniqueChars.size <= 2 ? ':' : ' '}
                 </span>
               )
@@ -318,9 +330,9 @@ export default function MultipleSequenceAlignmentViewer({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-slate-300 text-sm mb-1">Method</label>
-                <Select 
-                  value={msaOptions.method} 
-                  onValueChange={(value: any) => setMsaOptions(prev => ({ ...prev, method: value }))}
+                <Select
+                  value={msaOptions.method}
+                  onValueChange={(value) => setMsaOptions(prev => ({ ...prev, method: value as MSAOptions['method'] }))}
                 >
                   <SelectTrigger className="bg-slate-700 border-slate-600">
                     <SelectValue />
@@ -334,9 +346,9 @@ export default function MultipleSequenceAlignmentViewer({
               </div>
               <div>
                 <label className="block text-slate-300 text-sm mb-1">Sequence type</label>
-                <Select 
-                  value={msaOptions.type} 
-                  onValueChange={(value: any) => setMsaOptions(prev => ({ ...prev, type: value }))}
+                <Select
+                  value={msaOptions.type}
+                  onValueChange={(value) => setMsaOptions(prev => ({ ...prev, type: value as MSAOptions['type'] }))}
                 >
                   <SelectTrigger className="bg-slate-700 border-slate-600">
                     <SelectValue />
@@ -553,7 +565,7 @@ export default function MultipleSequenceAlignmentViewer({
           <div className="font-medium">Tips:</div>
           <div>• Add at least 2 sequences to run MSA</div>
           <div>• Auto-detection supports protein and nucleic sequences</div>
-          <div>• "*" = fully conserved, ":" = strongly conserved</div>
+          <div>• &quot;*&quot; = fully conserved, &quot;:&quot; = strongly conserved</div>
           <div>• Red highlights mark differences</div>
           <div>• Adjust method to balance speed and accuracy</div>
         </div>

@@ -5,6 +5,7 @@ import MultipleSequenceAlignmentViewer from '@/components/MultipleSequenceAlignm
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Dna, Users, Zap } from 'lucide-react'
+import { MultipleSequenceAlignment } from '@/types'
 
 // Example sequences
 const exampleSequences = {
@@ -78,7 +79,7 @@ const exampleSequences = {
 
 export default function MSAPage() {
   const [selectedExample, setSelectedExample] = useState<string | null>(null)
-  const [initialSequences, setInitialSequences] = useState<any[]>([])
+  const [initialSequences, setInitialSequences] = useState<MultipleSequenceAlignment['sequences']>([])
 
   const loadExample = (exampleKey: keyof typeof exampleSequences) => {
     setInitialSequences(exampleSequences[exampleKey])
@@ -130,7 +131,7 @@ export default function MSAPage() {
               <Zap className="h-12 w-12 text-yellow-400 mx-auto mb-4" />
               <h3 className="text-white font-semibold mb-2">High Performance</h3>
               <p className="text-slate-300 text-sm">
-                Fast and accurate alignments powered by BioMSA's optimized algorithms.
+                Fast and accurate alignments powered by BioMSA&apos;s optimized algorithms.
               </p>
             </CardContent>
           </Card>
@@ -190,7 +191,7 @@ export default function MSAPage() {
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>Load a preset example with the buttons above</li>
                 <li>Or add sequences manually: name, species, and sequence content</li>
-                <li>Click "Run MSA" after adding at least 2 sequences</li>
+                <li>Click &quot;Run MSA&quot; after adding at least 2 sequences</li>
                 <li>Review the alignment, including conserved, variable, and gap positions</li>
               </ul>
             </div>
