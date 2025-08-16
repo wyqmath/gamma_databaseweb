@@ -77,15 +77,17 @@ export default function SpeciesIndexPage() {
       <div className="container mx-auto px-4">
         {/* Breadcrumb */}
         <div className="mb-6">
-          <Breadcrumb items={[{ label: 'Species Index', current: true }]} />
+          <Breadcrumb items={[
+            { label: 'Home', href: '/' },
+            { label: 'Species Index', href: '/species' }
+          ]} />
         </div>
 
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">Species Index</h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Explore γ-secretase complex data across different species. Compare sequences, 
-            structures, and evolutionary relationships.
+            Explore γ-secretase complex data across different species. Compare sequences, structures, and evolutionary relationships.
           </p>
         </div>
 
@@ -185,8 +187,8 @@ export default function SpeciesIndexPage() {
                             {speciesItem.category}
                           </span>
                           <Button asChild size="sm" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                            <Link href={`/explore?species=${speciesItem.id}`}>
-                              Explore
+                            <Link href={`/species/${speciesItem.id}`}>
+                              View Details
                               <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>
                           </Button>

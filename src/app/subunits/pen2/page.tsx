@@ -226,6 +226,11 @@ export default function PEN2Page() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button asChild className="bg-cyan-600 hover:bg-cyan-700 text-white">
+            <Link href="/subunits/pen2/compare">
+              Comparative Analysis
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700">
             <Link href="/species">
               Compare Across Species
             </Link>

@@ -71,7 +71,7 @@ export function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
     'explore': 'Explore Species',
     'complex': 'Complex Assembly',
     'interactions': 'Protein Interactions',
-    'comparison': 'Species Comparison',
+
     'admin': 'Admin Panel',
     'about': 'About Project',
     'login': 'Login',

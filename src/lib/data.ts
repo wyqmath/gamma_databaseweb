@@ -1,4 +1,4 @@
-import { Species, Protein, AlignmentData, ComparisonData, NewsItem, InteractionData, ComplexAssemblyStep, GammaSecreteaseData } from '@/types'
+import { Species, Protein, NewsItem, InteractionData, ComplexAssemblyStep, GammaSecreteaseData } from '@/types'
 
 // Helper function to get base URL
 function getBaseUrl() {
@@ -174,54 +174,7 @@ export async function getProteinsBySpecies(speciesId: string): Promise<Protein[]
   }
 }
 
-export async function getAlignments(): Promise<AlignmentData[]> {
-  try {
-    const data = await readJsonFile<AlignmentData[]>('data/alignments.json')
-    return data || []
-  } catch (error) {
-    console.error('Error fetching alignments:', error)
-    return []
-  }
-}
 
-export async function getComparisonData(humanSpeciesId: string, comparisonSpeciesId: string): Promise<ComparisonData[]> {
-  try {
-    // Get proteins for both species
-    const humanProteins = await getProteinsBySpecies(humanSpeciesId)
-    const comparisonProteins = await getProteinsBySpecies(comparisonSpeciesId)
-    const comparisonSpecies = await getSpeciesById(comparisonSpeciesId)
-    const alignments = await getAlignments()
-
-    if (!comparisonSpecies) return []
-
-    const comparisons: ComparisonData[] = []
-
-    for (const humanProtein of humanProteins) {
-      const comparisonProtein = comparisonProteins.find(p => p.subunit === humanProtein.subunit)
-      if (comparisonProtein) {
-        // Find alignment data
-        const alignmentData = alignments.find(a =>
-          a.human_protein_id === humanProtein.id &&
-          a.comparison_protein_id === comparisonProtein.id
-        )
-
-        if (alignmentData) {
-          comparisons.push({
-            human_protein: humanProtein,
-            comparison_protein: comparisonProtein,
-            alignment: alignmentData,
-            species: comparisonSpecies
-          })
-        }
-      }
-    }
-
-    return comparisons
-  } catch (error) {
-    console.error('Error fetching comparison data:', error)
-    return []
-  }
-}
 
 // Additional utility functions
 export async function getNewsItems(): Promise<NewsItem[]> {
@@ -357,4 +310,94 @@ export async function getSubunitStats(): Promise<{[key: string]: {species: numbe
     console.error('Error calculating subunit stats:', error)
     return {}
   }
+}
+
+// Get specific protein by species and subunit
+export async function getProteinBySpeciesAndSubunit(speciesId: string, subunit: string): Promise<Protein | null> {
+  try {
+    const proteins = await getProteins()
+    const normalizedSubunit = normalizeSubunitName(subunit.toUpperCase() as 'PSEN1' | 'PEN2' | 'APH1' | 'NCT')
+    return proteins.find(p => p.species_id === speciesId && p.subunit === normalizedSubunit) || null
+  } catch (error) {
+    console.error('Error fetching protein by species and subunit:', error)
+    return null
+  }
+}
+
+// Get all proteins for a specific subunit across all species
+export async function getProteinsBySubunit(subunit: string): Promise<Protein[]> {
+  try {
+    const proteins = await getProteins()
+    const normalizedSubunit = normalizeSubunitName(subunit.toUpperCase() as 'PSEN1' | 'PEN2' | 'APH1' | 'NCT')
+    return proteins.filter(p => p.subunit === normalizedSubunit)
+  } catch (error) {
+    console.error('Error fetching proteins by subunit:', error)
+    return []
+  }
+}
+
+// Calculate basic sequence statistics
+export function calculateSequenceStats(sequence: string) {
+  const length = sequence.length
+  const aminoAcids = 'ACDEFGHIKLMNPQRSTVWY'
+  const composition: Record<string, number> = {}
+
+  // Initialize composition
+  aminoAcids.split('').forEach(aa => {
+    composition[aa] = 0
+  })
+
+  // Count amino acids
+  sequence.split('').forEach(aa => {
+    if (composition[aa] !== undefined) {
+      composition[aa]++
+    }
+  })
+
+  // Convert to percentages
+  const percentageComposition: Record<string, number> = {}
+  Object.keys(composition).forEach(aa => {
+    percentageComposition[aa] = (composition[aa] / length) * 100
+  })
+
+  return {
+    length,
+    composition: percentageComposition,
+    molecularWeight: estimateMolecularWeight(sequence),
+    hydrophobicResidues: calculateHydrophobicPercentage(sequence)
+  }
+}
+
+// Estimate molecular weight (simplified calculation)
+function estimateMolecularWeight(sequence: string): number {
+  const aaWeights: Record<string, number> = {
+    'A': 89.1, 'C': 121.2, 'D': 133.1, 'E': 147.1, 'F': 165.2,
+    'G': 75.1, 'H': 155.2, 'I': 131.2, 'K': 146.2, 'L': 131.2,
+    'M': 149.2, 'N': 132.1, 'P': 115.1, 'Q': 146.2, 'R': 174.2,
+    'S': 105.1, 'T': 119.1, 'V': 117.1, 'W': 204.2, 'Y': 181.2
+  }
+
+  let weight = 0
+  sequence.split('').forEach(aa => {
+    weight += aaWeights[aa] || 0
+  })
+
+  // Subtract water molecules (n-1 peptide bonds)
+  weight -= (sequence.length - 1) * 18.015
+
+  return Math.round(weight * 100) / 100
+}
+
+// Calculate hydrophobic residue percentage
+function calculateHydrophobicPercentage(sequence: string): number {
+  const hydrophobic = 'AILMFPWV'
+  let count = 0
+
+  sequence.split('').forEach(aa => {
+    if (hydrophobic.includes(aa)) {
+      count++
+    }
+  })
+
+  return Math.round((count / sequence.length) * 100 * 100) / 100
 }

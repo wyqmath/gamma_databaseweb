@@ -31,17 +31,7 @@ export interface GammaSecreteaseData {
   complex_structures: string[]
 }
 
-export interface AlignmentData {
-  id: string
-  human_protein_id: string
-  comparison_protein_id: string
-  similarity_percentage: number
-  mismatches: number
-  gaps: number
-  comparison_summary?: string
-  alignment_data: string
-  created_at: string
-}
+
 
 export interface MultipleSequenceAlignment {
   sequences: Array<{
@@ -68,12 +58,7 @@ export interface MSAOptions {
   debug?: boolean
 }
 
-export interface ComparisonData {
-  human_protein: Protein
-  comparison_protein: Protein
-  alignment: AlignmentData
-  species: Species
-}
+
 
 export interface KeySite {
   position: number
@@ -117,9 +102,76 @@ export type Subunit = typeof SUBUNITS[number]
 
 export const SPECIES_CATEGORIES = [
   'Mammals',
-  'Fish', 
+  'Fish',
   'Insects',
   'Plants',
   'Other'
 ] as const
 export type SpeciesCategory = typeof SPECIES_CATEGORIES[number]
+
+// Structural comparison interfaces
+export interface StructuralComparisonResult {
+  rmsd: number
+  tmScore: number
+  alignedLength: number
+  sequenceIdentity: number
+  gdt_ts?: number
+  gdt_ha?: number
+  chainLength1: number
+  chainLength2: number
+  alignedResidues: number
+  rotationMatrix?: number[][]
+  translationVector?: number[]
+}
+
+export interface SequenceSimilarityResult {
+  identity: number
+  similarity: number
+  gaps: number
+  score: number
+  alignmentLength: number
+  identicalResidues: number
+  similarResidues: number
+  gapResidues: number
+}
+
+export interface ComparisonAnalysis {
+  referenceSpecies: string
+  targetSpecies: string
+  subunit: string
+  sequenceSimilarity: SequenceSimilarityResult
+  structuralComparison: StructuralComparisonResult
+  conservedRegions: ConservedRegion[]
+  functionalSites: FunctionalSiteComparison[]
+  overallScore: number
+}
+
+export interface ConservedRegion {
+  start: number
+  end: number
+  conservationLevel: number
+  description: string
+  functionalImportance: 'high' | 'medium' | 'low'
+}
+
+export interface FunctionalSiteComparison {
+  position: number
+  referenceResidue: string
+  targetResidue: string
+  isConserved: boolean
+  functionalRole: string
+  importance: 'critical' | 'important' | 'moderate'
+}
+
+export interface SubunitComparisonData {
+  subunit: string
+  referenceProtein: Protein
+  comparisons: ComparisonAnalysis[]
+  statistics: {
+    averageSequenceIdentity: number
+    averageStructuralSimilarity: number
+    mostSimilarSpecies: string
+    leastSimilarSpecies: string
+    conservationScore: number
+  }
+}

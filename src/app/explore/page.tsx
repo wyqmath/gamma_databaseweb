@@ -171,7 +171,7 @@ export default function ExplorePage() {
                       {speciesItem.category}
                     </span>
                     <Button asChild size="sm" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                      <Link href={`/comparison/${speciesItem.id}`}>
+                      <Link href={`/msa?species=${speciesItem.id}`}>
                         Compare
                         <ArrowRight className="ml-1 h-3 w-3" />
                       </Link>

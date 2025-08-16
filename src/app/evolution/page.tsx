@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -13,8 +14,35 @@ import { ChevronDown, Download, Maximize2 } from 'lucide-react'
 
 export default function EvolutionPage() {
   const [selectedSubunit, setSelectedSubunit] = useState('PSEN1')
+  const router = useRouter()
 
   const subunits = ['PSEN1', 'NCT', 'APH-1', 'PEN-2']
+
+  // Species mapping for phylogenetic tree navigation
+  // Map display names to actual species IDs in our database
+  const speciesMapping = {
+    'Human (H. sapiens)': null, // Not in current dataset
+    'Mouse (M. musculus)': 'mus',
+    'Zebrafish (D. rerio)': 'danio',
+    'Fruit Fly (D. melanogaster)': null, // Not in current dataset
+    'C. elegans': null // Not in current dataset
+  }
+
+  // Handle species node click
+  const handleSpeciesClick = (speciesLabel: string) => {
+    const speciesId = speciesMapping[speciesLabel as keyof typeof speciesMapping]
+    if (speciesId) {
+      // Navigate to species page with the selected subunit
+      const subunitPath = selectedSubunit.toLowerCase().replace('-', '')
+      router.push(`/species/${speciesId}/${subunitPath}`)
+    }
+    // If no speciesId, do nothing (species is disabled)
+  }
+
+  // Check if species has data available
+  const hasSpeciesData = (speciesLabel: string) => {
+    return speciesMapping[speciesLabel as keyof typeof speciesMapping] !== null
+  }
 
   // Mock phylogenetic tree data
   const treeData = {
@@ -154,22 +182,62 @@ export default function EvolutionPage() {
                   <line x1="350" y1="250" x2="450" y2="250" />
                 </g>
                 
-                {/* Species labels */}
+                {/* Species labels - clickable for available species */}
                 <g className="text-sm fill-current">
-                  <text x="460" y="55" className="text-cyan-400 hover:text-cyan-300 cursor-pointer">
-                    Human (H. sapiens)
+                  <text
+                    x="460"
+                    y="55"
+                    className={hasSpeciesData('Human (H. sapiens)')
+                      ? "text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors"
+                      : "text-slate-500 cursor-not-allowed"
+                    }
+                    onClick={hasSpeciesData('Human (H. sapiens)') ? () => handleSpeciesClick('Human (H. sapiens)') : undefined}
+                  >
+                    Human (H. sapiens) {!hasSpeciesData('Human (H. sapiens)') && '(Coming Soon)'}
                   </text>
-                  <text x="460" y="105" className="text-blue-400 hover:text-blue-300 cursor-pointer">
+                  <text
+                    x="460"
+                    y="105"
+                    className={hasSpeciesData('Mouse (M. musculus)')
+                      ? "text-blue-400 hover:text-blue-300 cursor-pointer transition-colors"
+                      : "text-slate-500 cursor-not-allowed"
+                    }
+                    onClick={hasSpeciesData('Mouse (M. musculus)') ? () => handleSpeciesClick('Mouse (M. musculus)') : undefined}
+                  >
                     Mouse (M. musculus)
                   </text>
-                  <text x="460" y="155" className="text-green-400 hover:text-green-300 cursor-pointer">
+                  <text
+                    x="460"
+                    y="155"
+                    className={hasSpeciesData('Zebrafish (D. rerio)')
+                      ? "text-green-400 hover:text-green-300 cursor-pointer transition-colors"
+                      : "text-slate-500 cursor-not-allowed"
+                    }
+                    onClick={hasSpeciesData('Zebrafish (D. rerio)') ? () => handleSpeciesClick('Zebrafish (D. rerio)') : undefined}
+                  >
                     Zebrafish (D. rerio)
                   </text>
-                  <text x="460" y="205" className="text-yellow-400 hover:text-yellow-300 cursor-pointer">
-                    Fruit Fly (D. melanogaster)
+                  <text
+                    x="460"
+                    y="205"
+                    className={hasSpeciesData('Fruit Fly (D. melanogaster)')
+                      ? "text-yellow-400 hover:text-yellow-300 cursor-pointer transition-colors"
+                      : "text-slate-500 cursor-not-allowed"
+                    }
+                    onClick={hasSpeciesData('Fruit Fly (D. melanogaster)') ? () => handleSpeciesClick('Fruit Fly (D. melanogaster)') : undefined}
+                  >
+                    Fruit Fly (D. melanogaster) {!hasSpeciesData('Fruit Fly (D. melanogaster)') && '(Coming Soon)'}
                   </text>
-                  <text x="460" y="255" className="text-purple-400 hover:text-purple-300 cursor-pointer">
-                    C. elegans
+                  <text
+                    x="460"
+                    y="255"
+                    className={hasSpeciesData('C. elegans')
+                      ? "text-purple-400 hover:text-purple-300 cursor-pointer transition-colors"
+                      : "text-slate-500 cursor-not-allowed"
+                    }
+                    onClick={hasSpeciesData('C. elegans') ? () => handleSpeciesClick('C. elegans') : undefined}
+                  >
+                    C. elegans {!hasSpeciesData('C. elegans') && '(Coming Soon)'}
                   </text>
                 </g>
                 
@@ -222,6 +290,17 @@ export default function EvolutionPage() {
                   <span>Nematodes</span>
                 </div>
               </div>
+            </div>
+
+            {/* Interactive Instructions */}
+            <div className="mt-4 p-4 bg-blue-900/20 border border-blue-700/30 rounded-lg">
+              <h4 className="text-sm font-semibold text-blue-300 mb-2">💡 Interactive Features</h4>
+              <p className="text-xs text-blue-200 mb-2">
+                Click on available species names (colored) to view detailed {selectedSubunit} protein information for that organism.
+              </p>
+              <p className="text-xs text-slate-400">
+                Gray species names indicate data coming soon. Currently available: Mouse, Zebrafish.
+              </p>
             </div>
           </CardContent>
         </Card>

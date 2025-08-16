@@ -1,0 +1,230 @@
+{
+  "PSEN1": {
+    "dictyostelium": {
+      "rmsd": 2.45,
+      "tmScore": 0.782,
+      "alignedLength": 398,
+      "sequenceIdentity": 45.2,
+      "gdt_ts": 78.5,
+      "gdt_ha": 65.3,
+      "chainLength1": 467,
+      "chainLength2": 412,
+      "alignedResidues": 398
+    },
+    "hibiscus": {
+      "rmsd": 3.12,
+      "tmScore": 0.654,
+      "alignedLength": 356,
+      "sequenceIdentity": 32.8,
+      "gdt_ts": 65.4,
+      "gdt_ha": 52.1,
+      "chainLength1": 467,
+      "chainLength2": 389,
+      "alignedResidues": 356
+    },
+    "pocillopora": {
+      "rmsd": 2.89,
+      "tmScore": 0.721,
+      "alignedLength": 378,
+      "sequenceIdentity": 38.6,
+      "gdt_ts": 72.1,
+      "gdt_ha": 58.9,
+      "chainLength1": 467,
+      "chainLength2": 401,
+      "alignedResidues": 378
+    },
+    "mus": {
+      "rmsd": 0.85,
+      "tmScore": 0.956,
+      "alignedLength": 459,
+      "sequenceIdentity": 94.7,
+      "gdt_ts": 95.6,
+      "gdt_ha": 91.2,
+      "chainLength1": 467,
+      "chainLength2": 463,
+      "alignedResidues": 459
+    },
+    "danio": {
+      "rmsd": 1.23,
+      "tmScore": 0.891,
+      "alignedLength": 445,
+      "sequenceIdentity": 78.4,
+      "gdt_ts": 89.1,
+      "gdt_ha": 82.7,
+      "chainLength1": 467,
+      "chainLength2": 451,
+      "alignedResidues": 445
+    }
+  },
+  "NCT": {
+    "dictyostelium": {
+      "rmsd": 3.67,
+      "tmScore": 0.598,
+      "alignedLength": 512,
+      "sequenceIdentity": 28.9,
+      "gdt_ts": 59.8,
+      "gdt_ha": 45.2,
+      "chainLength1": 709,
+      "chainLength2": 578,
+      "alignedResidues": 512
+    },
+    "hibiscus": {
+      "rmsd": 2.98,
+      "tmScore": 0.687,
+      "alignedLength": 598,
+      "sequenceIdentity": 35.4,
+      "gdt_ts": 68.7,
+      "gdt_ha": 54.3,
+      "chainLength1": 709,
+      "chainLength2": 634,
+      "alignedResidues": 598
+    },
+    "pocillopora": {
+      "rmsd": 3.21,
+      "tmScore": 0.645,
+      "alignedLength": 567,
+      "sequenceIdentity": 31.2,
+      "gdt_ts": 64.5,
+      "gdt_ha": 49.8,
+      "chainLength1": 709,
+      "chainLength2": 612,
+      "alignedResidues": 567
+    },
+    "mus": {
+      "rmsd": 0.92,
+      "tmScore": 0.943,
+      "alignedLength": 695,
+      "sequenceIdentity": 91.8,
+      "gdt_ts": 94.3,
+      "gdt_ha": 89.6,
+      "chainLength1": 709,
+      "chainLength2": 701,
+      "alignedResidues": 695
+    },
+    "danio": {
+      "rmsd": 1.45,
+      "tmScore": 0.876,
+      "alignedLength": 678,
+      "sequenceIdentity": 76.2,
+      "gdt_ts": 87.6,
+      "gdt_ha": 79.4,
+      "chainLength1": 709,
+      "chainLength2": 689,
+      "alignedResidues": 678
+    }
+  },
+  "APH-1": {
+    "dictyostelium": {
+      "rmsd": 2.78,
+      "tmScore": 0.734,
+      "alignedLength": 198,
+      "sequenceIdentity": 42.1,
+      "gdt_ts": 73.4,
+      "gdt_ha": 61.2,
+      "chainLength1": 265,
+      "chainLength2": 234,
+      "alignedResidues": 198
+    },
+    "hibiscus": {
+      "rmsd": 3.45,
+      "tmScore": 0.612,
+      "alignedLength": 176,
+      "sequenceIdentity": 29.8,
+      "gdt_ts": 61.2,
+      "gdt_ha": 47.6,
+      "chainLength1": 265,
+      "chainLength2": 201,
+      "alignedResidues": 176
+    },
+    "pocillopora": {
+      "rmsd": 2.56,
+      "tmScore": 0.758,
+      "alignedLength": 189,
+      "sequenceIdentity": 38.9,
+      "gdt_ts": 75.8,
+      "gdt_ha": 63.4,
+      "chainLength1": 265,
+      "chainLength2": 218,
+      "alignedResidues": 189
+    },
+    "mus": {
+      "rmsd": 0.78,
+      "tmScore": 0.967,
+      "alignedLength": 258,
+      "sequenceIdentity": 96.1,
+      "gdt_ts": 96.7,
+      "gdt_ha": 93.8,
+      "chainLength1": 265,
+      "chainLength2": 261,
+      "alignedResidues": 258
+    },
+    "danio": {
+      "rmsd": 1.12,
+      "tmScore": 0.923,
+      "alignedLength": 251,
+      "sequenceIdentity": 82.7,
+      "gdt_ts": 92.3,
+      "gdt_ha": 86.9,
+      "chainLength1": 265,
+      "chainLength2": 257,
+      "alignedResidues": 251
+    }
+  },
+  "PEN-2": {
+    "dictyostelium": {
+      "rmsd": 1.89,
+      "tmScore": 0.823,
+      "alignedLength": 89,
+      "sequenceIdentity": 48.3,
+      "gdt_ts": 82.3,
+      "gdt_ha": 71.2,
+      "chainLength1": 101,
+      "chainLength2": 97,
+      "alignedResidues": 89
+    },
+    "hibiscus": {
+      "rmsd": 2.34,
+      "tmScore": 0.756,
+      "alignedLength": 85,
+      "sequenceIdentity": 35.6,
+      "gdt_ts": 75.6,
+      "gdt_ha": 62.8,
+      "chainLength1": 101,
+      "chainLength2": 93,
+      "alignedResidues": 85
+    },
+    "pocillopora": {
+      "rmsd": 2.01,
+      "tmScore": 0.798,
+      "alignedLength": 92,
+      "sequenceIdentity": 41.7,
+      "gdt_ts": 79.8,
+      "gdt_ha": 67.4,
+      "chainLength1": 101,
+      "chainLength2": 105,
+      "alignedResidues": 92
+    },
+    "mus": {
+      "rmsd": 0.65,
+      "tmScore": 0.978,
+      "alignedLength": 98,
+      "sequenceIdentity": 97.2,
+      "gdt_ts": 97.8,
+      "gdt_ha": 95.1,
+      "chainLength1": 101,
+      "chainLength2": 99,
+      "alignedResidues": 98
+    },
+    "danio": {
+      "rmsd": 0.89,
+      "tmScore": 0.934,
+      "alignedLength": 96,
+      "sequenceIdentity": 85.4,
+      "gdt_ts": 93.4,
+      "gdt_ha": 88.7,
+      "chainLength1": 101,
+      "chainLength2": 98,
+      "alignedResidues": 96
+    }
+  }
+}
